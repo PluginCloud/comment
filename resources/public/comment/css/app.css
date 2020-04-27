@@ -1,0 +1,136 @@
+html {
+    background-color: #F2F2F2;
+}
+.right {
+    text-align: right;
+}
+.center {
+    text-align: center;
+}
+.left {
+    text-align: left;
+}
+.clear {
+    clear: both;
+}
+.none {
+    display: none;
+}
+.footer {
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+.main_layout {
+    min-height: 820px;
+}
+.footer a {
+    color: #fff;
+}
+/*底部*/
+.footer_ul {
+    margin-top: 20px;
+}
+.footer_ul li a {
+    font-size: 13px;
+    line-height: 24px;
+}
+
+/*首页*/
+.content_list .content_item {
+    height: 30px;
+    padding-top: 12px;
+    padding-left: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+.content_list .content_item_ellipsis {
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.content_list .content_item a {
+
+}
+.fly-column {
+    height: 50px;
+    line-height: 50px;
+}
+.fly-panel {
+    margin: 15px 5px;
+    border-radius: 2px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+}
+
+/*详情页*/
+.info_title {
+    font-size: 24px;
+    line-height: 32px;
+}
+.info_other {
+    padding: 20px 10px 10px 10px;
+}
+.info_other .tags {
+    font-size: 14px;
+    background-color: #01AAED;
+    color: #fff;
+    line-height: 24px;
+    padding-left: 10px;
+    margin-bottom: 1px;
+    border-radius: 3px;
+}
+.info_other .info_time {
+    font-size: 14px;
+    color: #fff;
+    line-height: 24px;
+    padding-left: 10px;
+    border-radius: 3px;
+}
+img {
+    max-width: 800px;
+}
+.publisher_profile .picture {
+    margin: 0 auto;
+    text-align: center;
+}
+.publisher_profile .picture img {
+    width: 100px;
+    border-radius: 50%;
+}
+
+/*搜索页*/
+.search_panel {
+    padding: 80px 40px 80px 10px;
+}
+
+/*个人中心页*/
+.profile .item {
+    float: left;
+    height: 50px;
+    text-align: center;
+    padding: 30px 0;
+}
+
+.action {
+    height: 70px;
+}
+.action .item {
+    float: left;
+    height: 50px;
+    text-align: center;
+    padding: 15px 0;
+}
+.profile_picture {
+    margin: 0 auto;
+    text-align: center;
+}
+.profile_picture img {
+    width: 100px;
+    border-radius: 50%;
+}
+.center_content_item {
+    height: 30px;
+    padding-top: 12px;
+    padding-left: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}

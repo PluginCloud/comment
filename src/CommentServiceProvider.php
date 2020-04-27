@@ -33,6 +33,10 @@ class CommentServiceProvider extends ServiceProvider
                 'comment'
             );
             $this->publishes(
+                [__DIR__.'/../resources/public' => public_path('/')],
+                'comment'
+            );
+            $this->publishes(
                 [__DIR__.'/../resources/views' => resource_path('views/comment/')],
                 'comment'
             );
