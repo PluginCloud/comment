@@ -17,7 +17,7 @@ class Content extends Base implements Feedable
         return FeedItem::create()
             ->id($this->id)
             ->title($this->title)
-            ->summary($this->description)
+            ->summary((is_null($this->description)?"":$this->description))
             ->updated($this->updated_at)
             ->link(route("comment.home.content.info", ['id', $this->id]))
             ->author($author);
