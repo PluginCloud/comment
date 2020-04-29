@@ -8,7 +8,7 @@
     <meta name="keywords" content="@yield("keywords", config("comment.seo.keywords").",".config("comment.site_name"))">
     <meta name="description" content="@yield("description", config("comment.seo.description"))">
     <base href="{{ config("comment.base_url") }}">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+    {{--<meta http-equiv="Content-Security-Policy" content="default-src 'self'">--}}
     <meta name="application-name" content="{{ config("comment.site_name") }}">
     <meta name="theme-color" content="#4285f4">
     <meta name="robots" content="index,follow">
