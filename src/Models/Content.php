@@ -21,4 +21,9 @@ class Content extends Base implements Feedable
             ->link(route("comment.content.info", ['id', $this->id]))
             ->author($this->author);
     }
+
+    public static function getFeedItems()
+    {
+        return Content::all();
+    }
 }
