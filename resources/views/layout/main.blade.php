@@ -27,10 +27,8 @@
     <meta name="referrer" content="no-referrer">
     <meta name="format-detection" content="telephone=no">
     <meta http-equiv="x-dns-prefetch-control" content="off">
-    <link rel="self" type="application/atom+xml" href="{{ public_path("/atom.xml") }}">
-    <!-- Feeds -->
-    {{--<link rel="alternate" href="https://feeds.feedburner.com/example" type="application/rss+xml" title="RSS">
-    <link rel="alternate" href="https://example.com/feed.atom" type="application/atom+xml" title="Atom 0.3">--}}
+    {{--<link rel="alternate" href="https://feeds.feedburner.com/example" type="application/rss+xml" title="RSS">--}}
+    <link rel="alternate" href="/feed" type="application/atom+xml" title="Contents">
     <link rel="icon" sizes="192x192" href="{{ public_path("icon.png") }}">
     <link rel="apple-touch-icon" href="{{ public_path("icon.png") }}">
     <link rel="apple-touch-startup-image" href="{{ public_path("icon.png") }}">

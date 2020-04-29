@@ -1,5 +1,5 @@
 <?php
-
+Route::feeds();
 Route::group(['as' => 'content.'], function () {
     Route::get('/', "ContentController@index")->name("index");
     Route::get("info/{id}", "ContentController@info")->name("info");

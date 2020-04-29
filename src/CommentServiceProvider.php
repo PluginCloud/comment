@@ -8,6 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use PluginCloud\Comment\Commands\GenerateSitemap;
 use PluginCloud\Comment\Http\Kernel;
 use PluginCloud\Comment\Http\Middleware\UserSessionMiddleware;
+use Spatie\Feed\FeedServiceProvider;
 
 class CommentServiceProvider extends ServiceProvider
 {
@@ -71,5 +72,12 @@ class CommentServiceProvider extends ServiceProvider
             $schedule = app(Schedule::class);
             $schedule->command('sitemap:generate')->daily();
         });
+    }
+
+    public function provides()
+    {
+        return [
+            FeedServiceProvider::class,
+        ];
     }
 }
