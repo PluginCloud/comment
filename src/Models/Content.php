@@ -13,13 +13,14 @@ class Content extends Base implements Feedable
 
     public function toFeedItem()
     {
+        $author = User::where("id", $this->user_id)->value("nickname");
         return FeedItem::create()
             ->id($this->id)
             ->title($this->title)
             ->summary($this->description)
             ->updated($this->updated_at)
             ->link(route("comment.content.info", ['id', $this->id]))
-            ->author($this->author);
+            ->author($author);
     }
 
     public static function getFeedItems()
