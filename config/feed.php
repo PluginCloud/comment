@@ -2,8 +2,8 @@
 return [
 
     'feeds' => [
-        'news' => [
-            'items' => 'PluginCloud\Comment\Models@getFeedItems',
+        'contents' => [
+            'items' => 'PluginCloud\Comment\Models\Content@getFeedItems',
 
             'url' => '/feed',
 
