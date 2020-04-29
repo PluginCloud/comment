@@ -19,7 +19,7 @@ class Content extends Base implements Feedable
             ->title($this->title)
             ->summary($this->description)
             ->updated($this->updated_at)
-            ->link(route("comment.content.info", ['id', $this->id]))
+            ->link(route("comment.home.content.info", ['id', $this->id]))
             ->author($author);
     }
 
