@@ -2,8 +2,10 @@
 
 namespace PluginCloud\Comment;
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use PluginCloud\Comment\Commands\GenerateSitemap;
 use PluginCloud\Comment\Http\Kernel;
 use PluginCloud\Comment\Http\Middleware\UserSessionMiddleware;
 
@@ -23,6 +25,9 @@ class CommentServiceProvider extends ServiceProvider
             $this->loadViewsFrom($views, 'comment');
         }
 
+        $this->commands([
+            GenerateSitemap::class,
+        ]);
         if ($this->app->runningInConsole()) {
             $this->publishes(
                 [__DIR__.'/../resources/assets' => public_path('vendor/plugin-cloud/comment')],
@@ -61,6 +66,10 @@ class CommentServiceProvider extends ServiceProvider
                     ->prefix('comment')->name("comment.admin.")
                     ->group( __DIR__.'/../routes/admin.php');
             });
+        });
+        $this->app->booted(function () {
+            $schedule = app(Schedule::class);
+            $schedule->command('sitemap:generate')->daily();
         });
     }
 }

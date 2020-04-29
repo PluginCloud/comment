@@ -7,13 +7,14 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "your name",
-            "email": "your email"
+            "name": "tingfeng-key",
+            "email": "1770963469@qq.com"
         }
     ],
     "require": {
         "php": ">=7.0.0",
-        "encore/laravel-admin": "~1.6"
+        "encore/laravel-admin": "~1.6",
+        "spatie/laravel-sitemap": "^5.7"
     },
     "require-dev": {
         "phpunit/phpunit": "~6.0"
