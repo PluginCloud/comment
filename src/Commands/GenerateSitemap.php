@@ -31,7 +31,7 @@ class GenerateSitemap extends Command
     public function handle()
     {
         // modify this to your own needs
-        SitemapGenerator::create(config('comment.domains'))
+        SitemapGenerator::create(config('comment.base_url'))
             ->writeToFile(public_path('sitemap.xml'));
     }
 }
