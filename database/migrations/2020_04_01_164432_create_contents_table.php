@@ -16,6 +16,7 @@ class CreateContentsTable extends Migration
         Schema::create('comment_contents', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer("user_id")->comment("用户ID");
+            $table->integer("collect_id")->nullable()->comment("文集ID");
             $table->integer("parent_id")->default(0)->comment("上级ID");
             $table->string("title")->comment("标题");
             $table->string("sub_title")->nullable()->comment("副标题");
@@ -25,7 +26,11 @@ class CreateContentsTable extends Migration
             $table->string("from_name")->nullable()->comment("来源平台名称");
             $table->string("from_url")->nullable()->comment("来源链接");
             $table->text("content")->comment("内容");
-            $table->string("tags")->nullable()->comment("标签");
+            $table->integer("read_count")->default(0)->comment("阅读数");
+            $table->integer("support_count")->default(0)->comment("支持数");
+            $table->integer("not_support_count")->default(0)->comment("不支持数");
+            $table->integer("collect_count")->default(0)->comment("收藏数");
+            $table->integer("comment_count")->default(0)->comment("评论数");
             $table->tinyInteger("is_online")->default(0)->comment("上线：1是0否");
             $table->tinyInteger("is_position")->default(0)->comment("推荐：1是0否");
             $table->tinyInteger("status")->default(1)->comment("状态：1正常0禁止");
@@ -45,6 +50,37 @@ class CreateContentsTable extends Migration
             $table->string("password")->comment("密码");
             $table->tinyInteger("sex")->default(1)->comment("性别：1.男，2.女");
             $table->dateTime("birthday")->nullable()->comment("生日");
+            $table->integer("follow_count")->default(0)->comment("关注数");
+            $table->integer("fans_count")->default(0)->comment("粉丝数");
+            $table->tinyInteger("is_position")->default(0)->comment("推荐：1是0否");
+            $table->tinyInteger("status")->default(1)->comment("状态：1正常0禁止");
+            $table->integer("order")->default(0)->comment("排序");
+            $table->softDeletes();
+            $table->timestamps();
+        });
+        Schema::create('comment_user_collects', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer("user_id")->comment("用户ID");
+            $table->string("name")->comment("文集名称");
+            $table->string("thumb_url")->nullable()->comment("封面URL");
+            $table->integer("read_count")->default(0)->comment("浏览数");
+            $table->integer("support_count")->default(0)->comment("支持数");
+            $table->integer("not_support_count")->default(0)->comment("不支持数");
+            $table->integer("collect_count")->default(0)->comment("收藏数");
+            $table->tinyInteger("is_online")->default(0)->comment("上线：1是0否");
+            $table->tinyInteger("is_position")->default(0)->comment("推荐：1是0否");
+            $table->tinyInteger("status")->default(1)->comment("状态：1正常0禁止");
+            $table->integer("order")->default(0)->comment("排序");
+            $table->softDeletes();
+            $table->timestamps();
+        });
+        Schema::create('comment_user_follows', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer("user_id")->comment("用户ID");
+            $table->tinyInteger("type")->comment("类型：1.用户，2.文章，3.文集");
+            $table->tinyInteger("action_type")->comment("行为类型：1.关注，2.阅读，3.点赞，4.反对");
+            $table->integer("data_id")->comment("数据ID");
+            $table->tinyInteger("is_online")->default(1)->comment("上线：1是0否");
             $table->tinyInteger("is_position")->default(0)->comment("推荐：1是0否");
             $table->tinyInteger("status")->default(1)->comment("状态：1正常0禁止");
             $table->integer("order")->default(0)->comment("排序");
@@ -78,6 +114,8 @@ class CreateContentsTable extends Migration
     {
         Schema::dropIfExists('comment_contents');
         Schema::dropIfExists('comment_users');
+        Schema::dropIfExists('comment_user_collects');
+        Schema::dropIfExists('comment_user_follows');
         Schema::dropIfExists('comment_user_ads');
     }
 }

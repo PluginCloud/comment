@@ -9,23 +9,34 @@ use Illuminate\Support\Facades\DB;
 use PluginCloud\Comment\Models\Content;
 use PluginCloud\Comment\Models\User;
 use PluginCloud\Comment\Models\UserAd;
+use PluginCloud\Comment\Models\UserCollect;
 
 class ContentController extends BaseController
 {
     public function index()
     {
         $contents = Content::where("parent_id", 0)->where("status", 1)->where("is_online", 1)
-            ->orderBy("id", "DESC")->paginate(20, "*", "contentPage");
-
-        $comments = Content::where("parent_id", "<>", 0)->where("status", 1)->where("is_online", 1)
-            ->orderBy("id", "DESC")->paginate(20, "*", "commentPage");
-        return view("comment.index", compact("contents", "comments"));
+            ->orderBy("id", "DESC")->paginate(20);
+        $collects = UserCollect::where("status", 1)->where("is_online", 1)
+            ->orderBy(DB::raw("rand()"))->paginate(20);
+        $users = User::where("status", 1)->orderBy(DB::raw("rand()"))->paginate(20);
+        foreach ($contents as &$content) {
+            $content->user_nickname = User::where("id", $content->user_id)->value("nickname");
+        }
+        foreach ($users as &$user) {
+            $user->content_count = Content::where("user_id", $user->id)->where("parent_id", 0)->count();
+            $user->comment_count = Content::where("user_id", $user->id)->where("parent_id", "<>", 0)->count();
+        }
+        return view("comment.content.index", compact("contents", "collects", "users"));
     }
 
     public function contents(Request $request)
     {
         $contents = Content::where("parent_id", 0)->where("status", 1)->where("is_online", 1)
             ->orderBy("id", "DESC")->paginate(20);
+        foreach ($contents as &$content) {
+            $content->user_nickname = User::where("id", $content->user_id)->value("nickname");
+        }
         return view("comment.content.contents", compact("contents"));
     }
 
@@ -33,12 +44,17 @@ class ContentController extends BaseController
     {
         $comments = Content::where("parent_id", "<>", 0)->where("status", 1)->where("is_online", 1)
             ->orderBy("id", "DESC")->paginate(20);
+        foreach ($comments as &$comment) {
+            $comment->user_nickname = User::where("id", $comment->user_id)->value("nickname");
+        }
         return view("comment.content.comments", compact("comments"));
     }
 
     public function info(Request $request, int $id)
     {
         $info = Content::where("id", $id)->first();
+        $info->read_count += 1;
+        $info->save();
         $user = $request->session()->get("comment_user");
         $publisher = User::where("id", $info->user_id)->first();
         $infoLeftAd = UserAd::where("user_id", $info->user_id)->where("status", 1)->where("is_online", 1)
@@ -76,7 +92,7 @@ class ContentController extends BaseController
 
         $userContents = Content::where("user_id", $info->user_id)->where("id", "<>", $info->id)
             ->where("parent_id", 0)->where("status", 1)->where("is_online", 1)
-            ->orderBy(DB::raw("rand()"))->limit(2)->get();
+            ->orderBy(DB::raw("rand()"))->limit(8)->get();
         return view("comment.content.info", compact(
             "info", "user", "publisher", "comments", "userContents",
             "infoLeftAd", "infoRightAd", "infoTopAd", "infoBottomAd",
@@ -100,7 +116,6 @@ class ContentController extends BaseController
             'from_name' => 'nullable|string|between:2,20',
             'from_url' => 'nullable|string|between:5,180',
             'content' => 'required|string|min:10',
-            'tags' => 'nullable|string|min:2',
             'keyword' => 'nullable|string|min:2',
             'description' => 'nullable|string|min:2',
         ], [
@@ -112,7 +127,6 @@ class ContentController extends BaseController
             'from_url.between' => '来源链接长度需在5-180个字符之间',
             'content.required' => '内容不能为空',
             'content.between' => '内容长度不能少于2个字符',
-            'tags.between' => '标签长度不能少于2个字符',
             'keyword.between' => '关键字字符长度不能少于2个字符',
             'description.between' => '描述长度不能少于2个字符',
         ]);
@@ -143,7 +157,6 @@ class ContentController extends BaseController
             'from_name' => $request->input("from_name"),
             'from_url' => $request->input("from_url"),
             'content' => $request->input("content"),
-            'tags' => $request->input("tags"),
             'keyword' => $keyword,
             'description' => $description,
             'is_online' => $isOnline,
@@ -170,7 +183,6 @@ class ContentController extends BaseController
             'from_name' => 'nullable|string|between:2,20',
             'from_url' => 'nullable|string|between:5,180',
             'content' => 'required|string|min:10',
-            'tags' => 'nullable|string|min:2',
             'keyword' => 'nullable|string|min:2',
             'description' => 'nullable|string|min:2',
         ], [
@@ -182,7 +194,6 @@ class ContentController extends BaseController
             'from_url.between' => '来源链接长度需在5-180个字符之间',
             'content.required' => '内容不能为空',
             'content.between' => '内容长度不能少于2个字符',
-            'tags.between' => '标签长度不能少于2个字符',
             'keyword.between' => '关键字字符长度不能少于2个字符',
             'description.between' => '描述长度不能少于2个字符',
         ]);
@@ -200,7 +211,6 @@ class ContentController extends BaseController
             'from_name' => $request->input("from_name"),
             'from_url' => $request->input("from_url"),
             'content' => $request->input("content"),
-            'tags' => $request->input("tags"),
             'keyword' => $request->input("keyword"),
             'description' => $request->input("description"),
             'is_online' => $request->input("is_online"),

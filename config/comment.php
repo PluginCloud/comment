@@ -4,6 +4,7 @@ return [
     'base_url' => env("COMMENT_BASE_URL", "http://127.0.0.1/"),
     'site_name' => env("COMMENT_SITE_NAME", "网站名称"),
     'site_count_url' => env("COMMENT_SITE_COUNT_URL", ''),
+    'enable_register' => env("COMMENT_ENABLE_REGISTER", true),
     'enable_page_share' => env("COMMENT_ENABLE_PAGE_SHARE", false),
     'enable_page_analytics' => env("COMMENT_ENABLE_PAGE_ANALYTICS", false),
     'seo' => [

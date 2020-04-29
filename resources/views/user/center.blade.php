@@ -105,7 +105,7 @@
                             </div>
                         @endforeach
                         @if($ads->hasPages())
-                            {{ $ads->links("comment.layout.paginate", ["paginate" => $ads]) }}
+                            {{ $ads->links("comment.layout.paginate") }}
                         @endif
                     </div>
                 </div>
@@ -137,7 +137,7 @@
                             </div>
                         @endforeach
                         @if($contents->hasPages())
-                            {{ $contents->links("comment.layout.paginate", ["paginate" => $contents]) }}
+                            {{ $contents->links("comment.layout.paginate") }}
                         @endif
                     </div>
                 </div>
@@ -169,7 +169,7 @@
                             </div>
                         @endforeach
                         @if($comments->hasPages())
-                            {{ $comments->links("comment.layout.paginate", ["paginate" => $comments]) }}
+                            {{ $comments->links("comment.layout.paginate") }}
                         @endif
                     </div>
                 </div>

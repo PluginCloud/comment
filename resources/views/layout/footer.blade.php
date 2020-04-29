@@ -3,7 +3,7 @@
 </div>
 <div class="layui-col-sm8 layui-col-xs12">
     <div class="layui-row">
-        <div class="layui-col-sm3 layui-col-xs3">
+        {{--<div class="layui-col-sm3 layui-col-xs3">
             <h3 class="center">常见问题</h3>
             <ul class="center footer_ul">
                 <li>
@@ -30,19 +30,20 @@
                     <a href="">免责声明</a>
                 </li>
             </ul>
-        </div>
-        <div class="layui-col-sm3 layui-col-xs3">
-            <h3 class="center">赞助商</h3>
+        </div>--}}
+        <div class="layui-col-sm3 layui-col-xs3 layui-col-sm-offset6 layui-col-xs-offset6">
+            <h3 class="center">订阅</h3>
             <ul class="center footer_ul">
-                {{--<li>
-                    <a href="">关于{{ config("comment.site_name") }}</a>
-                </li>
                 <li>
-                    <a href="">联系我们</a>
+                    <a href="{{ public_path("sitemap.xml") }}">网站地图</a>
                 </li>
-                <li>
-                    <a href="">打扰了</a>
-                </li>--}}
+                @if(!is_null(config("feed.feeds")))
+                    @foreach(config("feed.feeds") as $feed)
+                        <li>
+                            <a href="{{ $feed['url'] }}">{{ $feed['title'] }}</a>
+                        </li>
+                    @endforeach
+                @endif
             </ul>
         </div>
         <div class="layui-col-sm3 layui-col-xs3">

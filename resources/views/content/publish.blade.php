@@ -85,17 +85,7 @@
                                 <label class="layui-form-label">内容</label>
                                 <div class="layui-input-block">
                                     <textarea name="content" id="editor" rows="40"
-                                              placeholder="请输入内容" class="layui-textarea">
-                                        {{ old("content", $info->content ?? '') }}
-                                    </textarea>
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">标签</label>
-                                <div class="layui-input-block">
-                                    <input type="text" name="tags"
-                                           placeholder="(可选)" autocomplete="off" class="layui-input"
-                                           value="{{ old("tags", $info->tags ?? '') }}">
+                                              placeholder="请输入内容" class="layui-textarea">{{ old("content", $info->content ?? '') }}</textarea>
                                 </div>
                             </div>
                             <div class="layui-form-item">
