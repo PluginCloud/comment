@@ -35,7 +35,7 @@
             <h3 class="center">订阅</h3>
             <ul class="center footer_ul">
                 <li>
-                    <a href="{{ public_path("sitemap.xml") }}">网站地图</a>
+                    <a href="{{ asset("sitemap.xml") }}">网站地图</a>
                 </li>
                 @if(!is_null(config("feed.feeds")))
                     @foreach(config("feed.feeds") as $feed)
