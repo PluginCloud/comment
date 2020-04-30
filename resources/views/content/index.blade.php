@@ -5,56 +5,54 @@
     <div class="layui-row">
         <div class="layui-col-sm8 layui-col-xs12">
             <div class="layui-card fly-panel background_color_none">
-                <div class="layui-card-body">
-                    <ul class="content_list">
-                        @foreach($contents as $content)
-                            <li class="item">
-                                <h2 class="title item_ellipsis">
-                                    <a href="{{ route("comment.home.content.info", ["id" => $content->id]) }}"
-                                       title="{{ $content->title }} - {{ config("comment.site_name") }}">{{ $content->title }}</a>
-                                </h2>
-                                <div class="description layui-hide-xs">
-                                    {{ Illuminate\Support\Str::limit(strip_tags($content->content), 250,'...') }}
+                <ul class="content_list">
+                    @foreach($contents as $content)
+                        <li class="item">
+                            <h2 class="title item_ellipsis">
+                                <a href="{{ route("comment.home.content.info", ["id" => $content->id]) }}"
+                                   title="{{ $content->title }} - {{ config("comment.site_name") }}">{{ $content->title }}</a>
+                            </h2>
+                            <div class="description layui-hide-xs">
+                                {{ Illuminate\Support\Str::limit(strip_tags($content->content), 250,'...') }}
+                            </div>
+                            <div class="description layui-hide-sm layui-hide-lg">
+                                {{ Illuminate\Support\Str::limit(strip_tags($content->content), 140,'...') }}
+                            </div>
+                            <div class="other_info layui-hide-xs">
+                                <div class="layui-col-sm1">
+                                    <i class="icon layui-icon layui-icon-read"></i>
+                                    <span class="number">{{ $content->read_count }}</span>
                                 </div>
-                                <div class="description layui-hide-sm layui-hide-lg">
-                                    {{ Illuminate\Support\Str::limit(strip_tags($content->content), 140,'...') }}
+                                <div class="layui-col-sm2">
+                                    <i class="icon layui-icon layui-icon-username"></i>
+                                    <span class="number">{{ $content->user_nickname }}</span>
                                 </div>
-                                <div class="other_info layui-hide-xs">
-                                    <div class="layui-col-sm1">
-                                        <i class="icon layui-icon layui-icon-read"></i>
-                                        <span class="number">{{ $content->read_count }}</span>
-                                    </div>
-                                    <div class="layui-col-sm2">
-                                        <i class="icon layui-icon layui-icon-username"></i>
-                                        <span class="number">{{ $content->user_nickname }}</span>
-                                    </div>
-                                    <div class="layui-col-sm1">
-                                        <i class="icon layui-icon layui-icon-heart-fill"></i>
-                                        <span class="number">{{ $content->support_count }}</span>
-                                    </div>
-                                    <div class="layui-col-sm1">
-                                        <i class="icon layui-icon layui-icon-reply-fill"></i>
-                                        <span class="number">{{ $content->comment_count }}</span>
-                                    </div>
-                                    <div class="layui-col-sm1">
-                                        <i class="icon layui-icon layui-icon-star-fill"></i>
-                                        <span class="number">{{ $content->collect_count }}</span>
-                                    </div>
-                                    <div class="right layui-col-sm4 layui-col-sm-offset2">
-                                        <i class="icon layui-icon layui-icon-time"></i>
-                                        <span class="number">{{ $content->created_at }}</span>
-                                    </div>
+                                <div class="layui-col-sm1">
+                                    <i class="icon layui-icon layui-icon-heart-fill"></i>
+                                    <span class="number">{{ $content->support_count }}</span>
                                 </div>
-                            </li>
-                        @endforeach
-                        @if($contents->hasPages())
-                            <li class="more center">
-                                <a href="{{ route("comment.home.content.contents") }}"
-                                   title="查看更多 - {{ config("comment.site_name") }}">查看更多 >></a>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
+                                <div class="layui-col-sm1">
+                                    <i class="icon layui-icon layui-icon-reply-fill"></i>
+                                    <span class="number">{{ $content->comment_count }}</span>
+                                </div>
+                                <div class="layui-col-sm1">
+                                    <i class="icon layui-icon layui-icon-star-fill"></i>
+                                    <span class="number">{{ $content->collect_count }}</span>
+                                </div>
+                                <div class="right layui-col-sm4 layui-col-sm-offset2">
+                                    <i class="icon layui-icon layui-icon-time"></i>
+                                    <span class="number">{{ $content->created_at }}</span>
+                                </div>
+                            </div>
+                        </li>
+                    @endforeach
+                    @if($contents->hasPages())
+                        <li class="more center">
+                            <a href="{{ route("comment.home.content.contents") }}"
+                               title="查看更多 - {{ config("comment.site_name") }}">查看更多 >></a>
+                        </li>
+                    @endif
+                </ul>
             </div>
         </div>
         <div class="layui-col-sm4 layui-col-xs12">
