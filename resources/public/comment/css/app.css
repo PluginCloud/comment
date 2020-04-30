@@ -97,6 +97,7 @@ iframe {
 .content_list .item .description {
     color: #999;
     min-height: 48px;
+    font-size: 12px;
 }
 .content_list .item .other_info {
     line-height: 40px;
