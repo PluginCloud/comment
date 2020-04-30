@@ -42,7 +42,7 @@
             var form = layui.form;
             //监听提交
             form.on('submit(formDemo)', function(data){
-                var searchUrl = data.field.search_type+"site:{{ config("comment.domain") }} "+data.field.keyword;
+                var searchUrl = data.field.search_type+"site:{{ config("comment.domains") }} "+data.field.keyword;
                 window.open(searchUrl);
                 return false;
             });

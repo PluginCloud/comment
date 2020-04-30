@@ -48,7 +48,7 @@
     <meta itemprop="description" content="@yield("description", config("comment.seo.description"))">
     <meta itemprop="image" content="{{ asset("icon.png") }}">
     <meta name="description" itemprop="description" content="@yield("description", config("comment.seo.description"))">
-    <title>@yield("title") @if(isset($is_show_site_name) && $is_show_site_name === true)- {{ config("comment.site_name") }} @endif </title>
+    <title>@yield("title") @if(isset($is_show_site_name) && $is_show_site_name === true) - {{ config("comment.site_name") }} @endif </title>
     <link rel="stylesheet" href="{{ asset("layui/css/layui.css") }}">
     <link rel="stylesheet" href="{{ asset("layui/css/layui.mobile.css") }}">
     <link rel="stylesheet" href="{{ asset("comment/css/app.css") }}">
